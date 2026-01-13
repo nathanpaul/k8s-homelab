@@ -1,0 +1,7 @@
+/local_project/
+/local_project/**
+talosconfig
+controlplane.yaml
+worker.yaml
+worker*.yaml
+.vscode/
