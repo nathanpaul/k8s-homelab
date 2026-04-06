@@ -1,0 +1,55 @@
+# It's recommended to manage all Longhorn settings via this file
+# to maintain a declarative GitOps workflow.
+# Settings applied manually via the UI will not be reflected here and can be
+# overwritten during a Helm upgrade.
+defaultSettings:
+  # NOTE: Longhorn 1.10 consolidates settings for V1/V2 data engines. Use either
+  # a single scalar or a JSON string with per-engine values like {"v1":"...","v2":"..."} when needed.
+  defaultDataPath: "/var/lib/longhorn"
+  storageMinimalAvailablePercentage: "10"
+  # 200% is required with replicaCount=2 — each PVC counts double against the
+  # scheduling limit. At 100%, bootstrap fails with "insufficient storage" when
+  # all ~58 volumes are created at once, even though physical disk space is available.
+  storageOverProvisioningPercentage: "200"
+  allowRecurringJobWhileVolumeDetached: "true"
+  replicaAutoBalance: "best-effort"
+  # Ensure new consolidated settings that can be per-engine stay simple scalars for V1-only clusters
+  # These avoid parse errors like strconv.ParseBool/Int seen in manager logs when JSON strings are provided.
+  # Note: Use plain values, not JSON format - JSON causes "mismatched data engines" errors
+  fastReplicaRebuildEnabled: "true"
+  engineReplicaTimeout: "8"
+  # Reduced from 12 to 8 for homelab - still provides good performance with less CPU reservation
+  guaranteedInstanceManagerCPU: "8"
+  # Performance: prefer local disk for reads when replica is on same node
+  defaultDataLocality: "best-effort"
+  # Cleanup: limit snapshot accumulation per volume
+  snapshotMaxCount: "10"
+  autoCleanupSystemGeneratedSnapshot: "true"
+  # Allow Longhorn to auto-upgrade volume engines after manager upgrades
+  concurrentAutomaticEngineUpgradePerNodeLimit: "3"
+  # Allow detached volumes to rebuild replicas (fixes VolSync clone volumes
+  # stuck in VolumeCloneCopyCompleteAwaitingHealthy with replica count > 1)
+  offlineReplicaRebuilding: "true"
+# -- Disables the pre-upgrade check job. This is recommended for GitOps tools
+# like ArgoCD to prevent sync failures.
+preUpgradeChecker:
+  jobEnabled: false
+persistence:
+  # -- Specifies the default Longhorn StorageClass.
+  defaultClass: true
+  # -- Default number of replicas for volumes.
+  # Set to 2 for node-failure resilience. With replica 1, a single node going
+  # down makes all its volumes unavailable and causes stale attachment cascades.
+  # With replica 2, Longhorn serves from the surviving replica on another node.
+  # Trade-off: doubles storage usage (~932GB -> ~1.86TB of ~2TB capacity).
+  # VolSync + Kopia still handles off-cluster backup to NFS.
+  defaultClassReplicaCount: 2
+  # -- Default filesystem type.
+  defaultFsType: ext4
+  defaultDataLocality: best-effort
+  # -- Reclaim policy for the default storage class.
+  reclaimPolicy: Delete
+# -- Disable the default ingress creation, as you are managing it with a
+# separate HTTPRoute resource.
+ingress:
+  enabled: false

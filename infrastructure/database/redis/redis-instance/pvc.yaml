@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-master-0
+  namespace: redis-instance
+  labels:
+    app: redis
+    component: master
+    backup: "hourly"
+  annotations:
+    # Longhorn backup settings - Critical tier for database
+    longhorn.io/recurring-job-source: enabled
+    longhorn.io/recurring-job-group: critical
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: longhorn
+  # dataSourceRef is added dynamically by Kyverno if a backup exists

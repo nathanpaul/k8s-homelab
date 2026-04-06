@@ -1,0 +1,98 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infrastructure
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/mitchross/talos-argocd-proxmox.git
+      revision: main
+      directories:
+      - path: infrastructure/controllers/cert-manager
+      - path: infrastructure/controllers/external-dns
+      - path: infrastructure/controllers/gpu-priority-classes
+      - path: infrastructure/controllers/node-feature-discovery
+      - path: infrastructure/controllers/nvidia-device-plugin
+      - path: infrastructure/controllers/nvidia-gpu-operator
+      - path: infrastructure/controllers/metrics-server
+      - path: infrastructure/controllers/vertical-pod-autoscaler
+      - path: infrastructure/controllers/kyverno-vpa-policies
+      # NOTE: opentelemetry-operator is NOT listed here
+      # It has a dedicated standalone Application at Wave 5 (opentelemetry-operator-app.yaml)
+      # to ensure cert-manager (Wave 4) is ready for webhook certificates
+      - path: infrastructure/networking/cloudflared
+      - path: infrastructure/networking/gateway
+      - path: infrastructure/storage/container-registry
+      - path: infrastructure/storage/csi-driver-nfs
+      - path: infrastructure/storage/csi-driver-smb
+      - path: infrastructure/storage/local-storage
+      # NOTE: longhorn, snapshot-controller, volsync are NOT listed here
+      # They have dedicated standalone Applications at Wave 1 (longhorn-app.yaml,
+      # snapshot-controller-app.yaml, volsync-app.yaml) to ensure storage is
+      # healthy before PVC Plumber (Wave 2) and Kyverno (Wave 3).
+      - path: infrastructure/storage/kopia-ui
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: '{{path}}'
+        argocd.argoproj.io/sync-wave: "4"
+      labels:
+        app.kubernetes.io/part-of: infrastructure
+    spec:
+      project: infrastructure
+      revisionHistoryLimit: 3
+      source:
+        repoURL: https://github.com/mitchross/talos-argocd-proxmox.git
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+        - RespectIgnoreDifferences=true
+        - Replace=false
+        retry:
+          limit: -1  # Infinite retries — apps must never permanently die during bootstrap
+          backoff:
+            duration: 10s
+            factor: 2
+            maxDuration: 10m
+      ignoreDifferences:
+      # NOTE: .status ignored globally by ArgoCD 3.0+ — only non-status fields listed
+      - group: gateway.networking.k8s.io
+        kind: HTTPRoute
+        jqPathExpressions:
+        - .spec.rules[].backendRefs[].group
+        - .spec.rules[].backendRefs[].kind
+        - .spec.rules[].backendRefs[].weight
+      - group: external-secrets.io
+        kind: ExternalSecret
+        jqPathExpressions:
+        - .metadata.generation
+        - .metadata.finalizers
+        - .spec.data[].remoteRef.conversionStrategy
+        - .spec.data[].remoteRef.decodingStrategy
+        - .spec.data[].remoteRef.metadataPolicy
+      - group: kyverno.io
+        kind: ClusterPolicy
+        jsonPointers:
+        - /metadata/generation
+      # PVC fields that are immutable after creation - needed for Volume Populator
+      - group: ""
+        kind: PersistentVolumeClaim
+        jqPathExpressions:
+        - .spec.dataSourceRef
+        - .spec.dataSource
+        - .spec.volumeName
+        - .spec.resources.requests.storage

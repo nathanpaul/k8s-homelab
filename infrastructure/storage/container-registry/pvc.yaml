@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: container-registry
+    app.kubernetes.io/component: infrastructure
+    backup: "daily"
+  annotations:
+    # Longhorn backup settings - Critical tier for infrastructure
+    longhorn.io/recurring-job-source: enabled
+    longhorn.io/recurring-job-group: critical
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  # dataSourceRef is added dynamically by Kyverno if a backup exists

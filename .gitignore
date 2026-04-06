@@ -5,3 +5,4 @@ controlplane.yaml
 worker.yaml
 worker*.yaml
 .vscode/
+1password-credentials.json
