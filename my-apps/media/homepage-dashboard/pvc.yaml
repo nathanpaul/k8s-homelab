@@ -1,0 +1,20 @@
+# PV definition removed
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config
+  namespace: homepage-dashboard
+  labels:
+    app: homepage
+    type: config
+    backup: "daily"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: longhorn
+  # dataSourceRef is added dynamically by Kyverno if a backup exists
+
