@@ -55,7 +55,7 @@ spec:
   #     barmanObjectStore:
   #       serverName: khoj-database-v2
   #       destinationPath: s3://postgres-backups/cnpg/khoj
-  #       endpointURL: http://192.168.10.133:30293
+  #       endpointURL: http://192.168.1.59:30293
   #       s3Credentials:
   #         accessKeyId:
   #           name: cnpg-s3-credentials
@@ -95,7 +95,7 @@ spec:
     barmanObjectStore:
       serverName: khoj-database-v2
       destinationPath: s3://postgres-backups/cnpg/khoj
-      endpointURL: http://192.168.10.133:30293
+      endpointURL: http://192.168.1.59:30293
       s3Credentials:
         accessKeyId:
           name: cnpg-s3-credentials

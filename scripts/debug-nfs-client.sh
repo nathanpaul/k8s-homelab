@@ -9,7 +9,7 @@
 # Usage: bash debug-nfs-client.sh [talos-node-ip]
 # Example: bash debug-nfs-client.sh 192.168.10.142
 
-TRUENAS_IP="192.168.10.133"
+TRUENAS_IP="192.168.1.59"
 TALOS_NODE="${1:-}"
 
 echo "=========================================================="

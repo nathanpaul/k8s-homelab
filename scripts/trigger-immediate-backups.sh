@@ -183,7 +183,7 @@ main() {
     echo -e "• Watch backup progress: ${YELLOW}watch 'kubectl get backups -n longhorn-system'${NC}"
     echo -e "• Check backup details: ${YELLOW}kubectl describe backup <backup-name> -n longhorn-system${NC}"
     echo -e "• View in UI: ${YELLOW}http://your-longhorn-ui/backup${NC}"
-    echo -e "• Check MinIO: ${YELLOW}http://192.168.10.133:9002${NC}"
+    echo -e "• Check MinIO: ${YELLOW}http://192.168.1.59:9002${NC}"
     
     echo -e "\n${BLUE}💡 Run this script with different scenarios:${NC}"
     echo -e "• ${YELLOW}./trigger-immediate-backups.sh critical${NC} - Only critical volumes"

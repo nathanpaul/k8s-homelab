@@ -33,7 +33,7 @@ spec:
     barmanObjectStore:
       serverName: <app>-database      # IMPORTANT: bump on DR recovery (see below)
       destinationPath: s3://postgres-backups/cnpg/<app>
-      endpointURL: http://192.168.10.133:30293
+      endpointURL: http://192.168.1.59:30293
       s3Credentials:
         accessKeyId:
           name: cnpg-s3-credentials

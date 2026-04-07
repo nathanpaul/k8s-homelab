@@ -56,7 +56,7 @@ spec:
     barmanObjectStore:
       serverName: immich-database-v6
       destinationPath: s3://postgres-backups/cnpg/immich
-      endpointURL: http://192.168.10.133:30293
+      endpointURL: http://192.168.1.59:30293
       s3Credentials:
         accessKeyId:
           name: cnpg-s3-credentials

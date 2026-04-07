@@ -52,7 +52,7 @@ spec:
   #     barmanObjectStore:
   #       serverName: paperless-database-v2
   #       destinationPath: s3://postgres-backups/cnpg/paperless
-  #       endpointURL: http://192.168.10.133:30293
+  #       endpointURL: http://192.168.1.59:30293
   #       s3Credentials:
   #         accessKeyId:
   #           name: cnpg-s3-credentials
@@ -92,7 +92,7 @@ spec:
     barmanObjectStore:
       serverName: paperless-database-v2
       destinationPath: s3://postgres-backups/cnpg/paperless
-      endpointURL: http://192.168.10.133:30293
+      endpointURL: http://192.168.1.59:30293
       s3Credentials:
         accessKeyId:
           name: cnpg-s3-credentials

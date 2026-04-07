@@ -56,13 +56,13 @@ spec:
     driver: nfs.csi.k8s.io
     volumeHandle: app-nfs-pv
     volumeAttributes:
-      server: "192.168.10.133"
+      server: "192.168.1.59"
       share: "/mnt/BigTank/k8s/app-name"
 
 # WRONG - legacy nfs: (mountOptions silently ignored!)
 # spec:
 #   nfs:
-#     server: 192.168.10.133
+#     server: 192.168.1.59
 #     path: /mnt/BigTank/k8s/app-name
 ```
 
@@ -120,7 +120,7 @@ kubectl exec -n <ns> <pod> -- cat /sys/class/bdi/0:*/read_ahead_kb
 kubectl exec -n <ns> <pod> -- cat /proc/sys/sunrpc/tcp_slot_table_entries
 
 # Check mount options (verify nconnect=16, rsize=1048576)
-kubectl exec -n <ns> <pod> -- cat /proc/self/mountstats | grep -A3 "192.168.10.133"
+kubectl exec -n <ns> <pod> -- cat /proc/self/mountstats | grep -A3 "192.168.1.59"
 
 # Full NFS stats (connection distribution, slot usage, RTT)
 kubectl exec -n <ns> <pod> -- cat /proc/self/mountstats
