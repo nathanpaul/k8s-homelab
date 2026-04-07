@@ -9,7 +9,7 @@ spec:
       namespace: gateway
       sectionName: https
   hostnames:
-    - "photos.vanillax.me"
+    - "photos.paulnathan.io"
   rules:
     - backendRefs:
         - name: immich-server

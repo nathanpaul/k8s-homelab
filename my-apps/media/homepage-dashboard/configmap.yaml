@@ -32,172 +32,172 @@ data:
     - AI:
         - ComfyUI:
             icon: comfyui.png
-            href: https://comfyui.vanillax.me
+            href: https://comfyui.paulnathan.io
             description: AI Image & Video Generation
         - llama-cpp:
             icon: meta.png
-            href: https://llama.vanillax.me
+            href: https://llama.paulnathan.io
             description: Local LLM Inference Server
         - Open WebUI:
             icon: open-webui.png
-            href: https://open-webui.vanillax.me
+            href: https://open-webui.paulnathan.io
             description: AI Chat Interface
         - Perplexica:
             icon: perplexity-ai.png
-            href: https://perplexica.vanillax.me
+            href: https://perplexica.paulnathan.io
             description: AI-Powered Search Engine
     - Development:
         - Argo CD:
             icon: argocd.png
-            href: https://argocd.vanillax.me
+            href: https://argocd.paulnathan.io
             description: GitOps Continuous Delivery
             widget:
               type: argocd
-              url: https://argocd.vanillax.me
+              url: https://argocd.paulnathan.io
               key: argocd
         - Gitea:
             icon: gitea.png
-            href: https://gitea.vanillax.me
+            href: https://gitea.paulnathan.io
             description: Git Repository Manager
         - Headlamp:
             icon: headlamp.png
-            href: https://headlamp.vanillax.me
+            href: https://headlamp.paulnathan.io
             description: Kubernetes Dashboard
         - IT-Tools:
             icon: it-tools.png
-            href: https://it-tools.vanillax.me
+            href: https://it-tools.paulnathan.io
             description: IT Utility Tools Collection
         - Mailpit:
             icon: mailpit.png
-            href: https://mailpit.vanillax.me
+            href: https://mailpit.paulnathan.io
             description: Email Testing Server
         - n8n:
             icon: n8n.png
-            href: https://n8n.vanillax.me
+            href: https://n8n.paulnathan.io
             description: Workflow Automation
         - Pairdrop:
             icon: pairdrop.png
-            href: https://pairdrop.vanillax.me
+            href: https://pairdrop.paulnathan.io
             description: Peer-to-Peer File Transfer
         - Temporal:
             icon: temporal.png
-            href: https://temporal.vanillax.me
+            href: https://temporal.paulnathan.io
             description: Workflow Orchestration
         - ConvertX:
             icon: convertx.png
-            href: https://convertx.vanillax.me
+            href: https://convertx.paulnathan.io
             description: File Format Conversion
         - PostHog:
             icon: posthog.png
-            href: https://posthog.vanillax.me
+            href: https://posthog.paulnathan.io
             description: Product Analytics
         - DVWA:
             icon: mdi-shield-bug-outline
-            href: https://dvwa.vanillax.me
+            href: https://dvwa.paulnathan.io
             description: Security Testing App
         - Fizzy:
             icon: mdi-flask-outline
-            href: https://fizzy.vanillax.me
+            href: https://fizzy.paulnathan.io
             description: Fizzy
         - Vert:
             icon: mdi-application-outline
-            href: https://vert.vanillax.me
+            href: https://vert.paulnathan.io
             description: Vert
         - Echo Server:
             icon: mdi-server-outline
-            href: https://echo.vanillax.me
+            href: https://echo.paulnathan.io
             description: HTTP Echo & Debug Server
         - Nginx:
             icon: nginx.png
-            href: https://nginx.vanillax.me
+            href: https://nginx.paulnathan.io
             description: Web Server Example
     - Home:
         - Home Assistant:
             icon: home-assistant.png
-            href: https://homeassistant.vanillax.me
+            href: https://homeassistant.paulnathan.io
             description: Smart Home Automation
         - Frigate:
             icon: frigate.png
-            href: https://frigate.vanillax.me
+            href: https://frigate.paulnathan.io
             description: NVR & Object Detection
         - Paperless-NGX:
             icon: paperless-ngx.png
-            href: https://paperless.vanillax.me
+            href: https://paperless.paulnathan.io
             description: Document Management
         - Netbox:
             icon: netbox.png
-            href: https://netbox.vanillax.me
+            href: https://netbox.paulnathan.io
             description: Network Management Database
         - Wyze Bridge:
             icon: wyze.png
-            href: https://wyze-bridge.vanillax.me
+            href: https://wyze-bridge.paulnathan.io
             description: Camera Streaming Bridge
     - Media:
         - Immich:
             icon: immich.png
-            href: https://photos.vanillax.me
+            href: https://photos.paulnathan.io
             description: Photo & Video Management
         - Jellyfin:
             icon: jellyfin.png
-            href: https://jellyfin.vanillax.me
+            href: https://jellyfin.paulnathan.io
             description: Media Streaming Server
         - Kiwix:
             icon: kiwix.png
-            href: https://kiwix.vanillax.me
+            href: https://kiwix.paulnathan.io
             description: Offline Encyclopedia
         - Libreddit:
             icon: libreddit.png
-            href: https://libreddit.vanillax.me
+            href: https://libreddit.paulnathan.io
             description: Private Reddit Frontend
         - CopyParty:
             icon: mdi-folder-upload-outline
-            href: https://copyparty.vanillax.me
+            href: https://copyparty.paulnathan.io
             description: File Sharing Server
         - Nestmtx:
             icon: mdi-television-play
-            href: https://nestmtx.vanillax.me
+            href: https://nestmtx.paulnathan.io
             description: IPTV Playlist Server
         - Karakeep:
             icon: mdi-microphone-variant
-            href: https://karakeep.vanillax.me
+            href: https://karakeep.paulnathan.io
             description: Karaoke Management
     - Privacy:
         - SearXNG:
             icon: searxng.png
-            href: https://search.vanillax.me
+            href: https://search.paulnathan.io
             description: Private Metasearch Engine
         - ProxiTok:
             icon: proxitok.png
-            href: https://proxitok.vanillax.me
+            href: https://proxitok.paulnathan.io
             description: Private TikTok Frontend
     - Infrastructure & Monitoring:
         - Grafana:
             icon: grafana.png
-            href: https://grafana.vanillax.me
+            href: https://grafana.paulnathan.io
             description: Dashboards & Visualization
         - Prometheus:
             icon: prometheus.png
-            href: https://prometheus.vanillax.me
+            href: https://prometheus.paulnathan.io
             description: Metrics & Monitoring
         - Alertmanager:
             icon: alertmanager.png
-            href: https://alertmanager.vanillax.me
+            href: https://alertmanager.paulnathan.io
             description: Alert Management
         - Longhorn:
             icon: longhorn.png
-            href: https://longhorn.vanillax.me
+            href: https://longhorn.paulnathan.io
             description: Storage Management
         - Kopia:
             icon: kopia.png
-            href: https://kopia.vanillax.me
+            href: https://kopia.paulnathan.io
             description: Backup Management
         - Container Registry:
             icon: docker.png
-            href: https://registry.vanillax.me
+            href: https://registry.paulnathan.io
             description: Container Image Registry
         - Redis Commander:
             icon: redis.png
-            href: https://redis.vanillax.me
+            href: https://redis.paulnathan.io
             description: Redis Management UI
         - TrueNAS:
             icon: truenas.png

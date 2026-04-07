@@ -64,7 +64,7 @@ no Patroni, no leader election, just a postgres instance with backup management.
 
 ## Networking
 
-- **HTTPRoute**: `photos.vanillax.me` via `gateway-internal` (HTTPS)
+- **HTTPRoute**: `photos.paulnathan.io` via `gateway-internal` (HTTPS)
 - **Cilium policy**: NFS traffic to TrueNAS (port 2049) is allowed in `block-lan-access.yaml`
 
 ## PVCs

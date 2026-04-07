@@ -5,8 +5,8 @@ metadata:
   namespace: karakeep
 data:
   # Add any non-secret configuration values here
-  NEXTAUTH_URL: "https://karakeep.vanillax.me"
-  # OLLAMA_BASE_URL: "https://ollama.vanillax.me/api"
+  NEXTAUTH_URL: "https://karakeep.paulnathan.io"
+  # OLLAMA_BASE_URL: "https://ollama.paulnathan.io/api"
   OPENAI_BASE_URL: "http://llama-cpp-service.llama-cpp.svc.cluster.local:8080/v1"
   OPENAI_API_KEY: "sk-required"
   OLLAMA_KEEP_ALIVE: "5m"
