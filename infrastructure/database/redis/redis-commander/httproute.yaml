@@ -10,7 +10,7 @@ spec:
       name: gateway-internal
       namespace: gateway
   hostnames:
-    - "redis.vanillax.me"
+    - "redis.paulnathan.io"
   rules:
     - matches:
         - path:

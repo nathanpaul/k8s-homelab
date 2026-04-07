@@ -12,7 +12,7 @@ spec:
       sectionName: https
 
   hostnames:
-  - "argocd.vanillax.me"
+  - "argocd.paulnathan.io"
   rules:
   - matches:
     - path:

@@ -33,7 +33,7 @@ spec:
     name: gateway-external
     namespace: gateway
   hostnames:
-  - app.vanillax.me
+  - app.paulnathan.io
   rules:
   - backendRefs:
     - name: app-service

@@ -19,45 +19,45 @@ transport-loglevel: info
 
 ingress:
   # Test endpoint
-  - hostname: hello.vanillax.me
+  - hostname: hello.paulnathan.io
     service: hello_world
 
   # External services only (no internal services)
-  - hostname: search.vanillax.me
+  - hostname: search.paulnathan.io
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: search.vanillax.me
+      originServerName: search.paulnathan.io
 
-  - hostname: proxitok.vanillax.me
+  - hostname: proxitok.paulnathan.io
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: proxitok.vanillax.me
+      originServerName: proxitok.paulnathan.io
 
-  - hostname: libreddit.vanillax.me
+  - hostname: libreddit.paulnathan.io
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: libreddit.vanillax.me
+      originServerName: libreddit.paulnathan.io
 
-  - hostname: karakeep.vanillax.me
+  - hostname: karakeep.paulnathan.io
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: karakeep.vanillax.me
+      originServerName: karakeep.paulnathan.io
 
-  - hostname: vert.vanillax.me
+  - hostname: vert.paulnathan.io
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: vert.vanillax.me
+      originServerName: vert.paulnathan.io
 
-  - hostname: it-tools.vanillax.me
+  - hostname: it-tools.paulnathan.io
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: it-tools.vanillax.me
+      originServerName: it-tools.paulnathan.io
 
   # Catch-all 404
   - service: http_status:404
