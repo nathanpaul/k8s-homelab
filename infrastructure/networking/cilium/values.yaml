@@ -73,9 +73,13 @@ bpf:
 # Performance: BIG TCP reduces CPU overhead for large transfers (kernel >= 5.19)
 enableIPv4BIGTCP: true
 
+# BGP Control Plane for LoadBalancer Services
+bgpControlPlane:
+  enabled: true
+
 # L2 Announcements for LoadBalancer Services
 l2announcements:
-  enabled: true
+  enabled: false
   # Increase lease duration to reduce API calls
   leaseDuration: "15s"
   leaseRenewDeadline: "5s"

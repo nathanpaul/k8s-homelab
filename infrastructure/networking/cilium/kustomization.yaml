@@ -4,12 +4,12 @@ kind: Kustomization
 # kubePrism (localhost:7445) handles control plane HA via Omni's SideroLink
 # Only need service LoadBalancer resources for applications
 
-# NOTE: Apply ip-pool.yaml and l2-policy.yaml AFTER Cilium is running
+# NOTE: Apply ip-pool.yaml and bgp-policy.yaml AFTER Cilium is running
 # These require Cilium CRDs to be installed first
 
 resources:
  - ip-pool.yaml
- - l2-policy.yaml
+ - bgp-policy.yaml
  - policies/block-lan-access.yaml
 
 helmCharts:
