@@ -6,7 +6,6 @@ commonAnnotations:
   argocd.argoproj.io/sync-wave: "1"
 
 resources:
-- external-secret.yaml
 - cluster-secret-store.yaml
 helmCharts:
 - name: external-secrets
