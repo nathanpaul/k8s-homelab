@@ -4,6 +4,7 @@ namespace: vertical-pod-autoscaler
 
 resources:
   - namespace.yaml
+  - crds/vpa-v1-crd-gen.yaml
 
 helmCharts:
   - name: vertical-pod-autoscaler
