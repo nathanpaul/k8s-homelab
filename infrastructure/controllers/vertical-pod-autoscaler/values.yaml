@@ -1,5 +1,5 @@
 admissionController:
-  registerWebhook: true
+  registerWebhook: false
   extraArgs:
     - --feature-gates=InPlaceOrRecreate=true
   replicas: 1
