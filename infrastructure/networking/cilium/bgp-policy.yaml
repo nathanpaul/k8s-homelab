@@ -7,13 +7,14 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   nodeSelector:
     matchExpressions:
       - key: node-role.kubernetes.io/control-plane
         operator: DoesNotExist
   virtualRouters:
-    - localASN: 64514
+    - localASN: 64513
       exportPodCIDR: false
       neighbors:
         - peerAddress: '192.168.1.1/32'
