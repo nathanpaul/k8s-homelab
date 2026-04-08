@@ -27,7 +27,7 @@ operator:
   # This is the correct parameter for the operator token
   token:
     name: "1password-operator-token"    # This sets the secret name for the operator token
-    key: "connect-token"                        # The key within the secret
+    key: "token"                        # The key within the secret
   resources:
     requests:
       memory: "150Mi"
