@@ -11,7 +11,7 @@ admissionController:
       cpu: 200m
       memory: 256Mi
   certGen:
-    enabled: false
+    enabled: true
 
 recommender:
   replicas: 1
