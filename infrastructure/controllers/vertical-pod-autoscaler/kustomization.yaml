@@ -13,4 +13,3 @@ helmCharts:
     releaseName: vpa
     namespace: vertical-pod-autoscaler
     valuesFile: values.yaml
-    includeCRDs: true
