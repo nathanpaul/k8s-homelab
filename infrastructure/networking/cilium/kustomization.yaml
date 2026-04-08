@@ -9,7 +9,6 @@ kind: Kustomization
 
 resources:
  - ip-pool.yaml
- - bgp-policy.yaml
  - policies/block-lan-access.yaml
 
 helmCharts:
