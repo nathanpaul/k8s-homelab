@@ -19,7 +19,7 @@ Photos are stored on TrueNAS NFS and indexed by Immich **without duplication**.
 Originals stay on NFS read-only; only thumbnails and ML embeddings are stored locally.
 
 - **NFS server**: `192.168.1.59`
-- **NFS path**: `/mnt/BigTank/photos/All`
+- **NFS path**: `/mnt/user/photos/All`
 - **Container mount**: `/mnt/photos` (read-only on both server and ML pods)
 
 ### Storage breakdown
@@ -81,4 +81,4 @@ The `nfs-immich-photos` PersistentVolume is defined in `infrastructure/storage/c
 It uses a **static PV** (not a StorageClass) because NFS CSI dynamic provisioning creates a new subdirectory
 per PVC, which doesn't work for mounting existing data. Static PVs point directly at the existing NFS share.
 
-Mount: `192.168.1.59:/mnt/BigTank/photos/All` (read-only via `ro` mount option).
+Mount: `192.168.1.59:/mnt/user/photos/All` (read-only via `ro` mount option).

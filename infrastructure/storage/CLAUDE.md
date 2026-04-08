@@ -57,13 +57,13 @@ spec:
     volumeHandle: app-nfs-pv
     volumeAttributes:
       server: "192.168.1.59"
-      share: "/mnt/BigTank/k8s/app-name"
+      share: "/mnt/user/k8s/app-name"
 
 # WRONG - legacy nfs: (mountOptions silently ignored!)
 # spec:
 #   nfs:
 #     server: 192.168.1.59
-#     path: /mnt/BigTank/k8s/app-name
+#     path: /mnt/user/k8s/app-name
 ```
 
 **Reference**: `infrastructure/storage/csi-driver-nfs/storage-class.yaml` (immich static PV)

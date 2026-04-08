@@ -74,4 +74,4 @@ spec:
     volumeHandle: nfs-immich-photos
     volumeAttributes:
       server: "192.168.1.59"
-      share: "/mnt/BigTank/photos/All"
+      share: "/mnt/user/photos/All"

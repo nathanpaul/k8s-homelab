@@ -31,7 +31,7 @@ spec:
 1. **Kyverno generates ExternalSecret** - Pulls Kopia repository password from 1Password
 2. **Kyverno generates ReplicationSource** - Backup schedule (hourly or daily at 2am)
 3. **Kyverno generates ReplicationDestination** - Restore capability
-4. **Kyverno injects NFS mount** - Mounts TrueNAS NFS share (`192.168.1.59:/mnt/BigTank/k8s/volsync-kopia-nfs`)
+4. **Kyverno injects NFS mount** - Mounts TrueNAS NFS share (`192.168.1.59:/mnt/user/k8s/volsync-kopia-nfs`)
 5. **PVC Plumber checks for backups** - On PVC creation, automatically adds `dataSourceRef` to restore from last backup
 
 ## Backup Schedules
@@ -73,7 +73,7 @@ PVC populated from last backup
 
 - **Storage Backend**: Kopia filesystem repository on NFS
 - **NFS Server**: `192.168.1.59` (TrueNAS)
-- **NFS Path**: `/mnt/BigTank/k8s/volsync-kopia-nfs`
+- **NFS Path**: `/mnt/user/k8s/volsync-kopia-nfs`
 - **Compression**: zstd-fastest
 - **Snapshot Method**: Longhorn VolumeSnapshots (copy-on-write)
 - **Mover Security**: Runs as user/group 568
