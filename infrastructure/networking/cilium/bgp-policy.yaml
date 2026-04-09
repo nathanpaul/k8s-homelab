@@ -17,7 +17,7 @@ spec:
       peers:
         - name: "opnsense-router"
           peerAddress: "192.168.1.1"
-          peerASN: 64514
+          peerASN: 64513
           peerConfigRef:
             name: "lb-advertisement"
 ---
