@@ -41,7 +41,7 @@ kubectl create secret generic 1passwordconnect \
   --namespace external-secrets \
   --from-literal=token="$OP_CONNECT_TOKEN"
 
-echo "sleeping for helm"
+echo "sleeping for cilium to finish deploying"
 sleep 30
 
 ./scripts/bootstrap-argocd.sh
