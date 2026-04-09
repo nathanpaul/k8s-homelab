@@ -23,6 +23,8 @@ spec:
         app.kubernetes.io/part-of: smart-home
         app.kubernetes.io/version: stable
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       # Pod-level security context
       securityContext:
         fsGroup: 0
