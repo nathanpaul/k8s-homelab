@@ -90,8 +90,8 @@ Supported languages: Python, Node.js, Java, Go, .NET.
 | Prometheus | Longhorn PVC (20Gi) | Local cluster |
 | Grafana | Longhorn PVC (5Gi) | Local cluster |
 | Alertmanager | Longhorn PVC (2Gi) | Local cluster |
-| Loki | RustFS S3 (`loki` bucket) | TrueNAS 192.168.10.133:30293 |
-| Tempo | RustFS S3 (`tempo` bucket) | TrueNAS 192.168.10.133:30293 |
+| Loki | RustFS S3 (`loki` bucket) | TrueNAS 192.168.1.59:30293 |
+| Tempo | RustFS S3 (`tempo` bucket) | TrueNAS 192.168.1.59:30293 |
 
 ## Access
 
