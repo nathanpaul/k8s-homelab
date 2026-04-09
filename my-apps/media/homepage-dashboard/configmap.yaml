@@ -5,14 +5,11 @@ metadata:
   namespace: homepage-dashboard
 data:
   settings.yaml: |
-    title: VanillaX Dashboard
+    title: Paul Nathan Dashboard
     theme: dark
     color: slate
     headerStyle: clean
     layout:
-      AI:
-        style: row
-        columns: 4
       Development:
         style: row
         columns: 4
@@ -22,30 +19,10 @@ data:
       Media:
         style: row
         columns: 4
-      Privacy:
-        style: row
-        columns: 2
       Infrastructure & Monitoring:
         style: row
         columns: 4
   services.yaml: |
-    - AI:
-        - ComfyUI:
-            icon: comfyui.png
-            href: https://comfyui.paulnathan.io
-            description: AI Image & Video Generation
-        - llama-cpp:
-            icon: meta.png
-            href: https://llama.paulnathan.io
-            description: Local LLM Inference Server
-        - Open WebUI:
-            icon: open-webui.png
-            href: https://open-webui.paulnathan.io
-            description: AI Chat Interface
-        - Perplexica:
-            icon: perplexity-ai.png
-            href: https://perplexica.paulnathan.io
-            description: AI-Powered Search Engine
     - Development:
         - Argo CD:
             icon: argocd.png
@@ -55,121 +32,20 @@ data:
               type: argocd
               url: https://argocd.paulnathan.io
               key: argocd
-        - Gitea:
-            icon: gitea.png
-            href: https://gitea.paulnathan.io
-            description: Git Repository Manager
-        - Headlamp:
-            icon: headlamp.png
-            href: https://headlamp.paulnathan.io
-            description: Kubernetes Dashboard
-        - IT-Tools:
-            icon: it-tools.png
-            href: https://it-tools.paulnathan.io
-            description: IT Utility Tools Collection
-        - Mailpit:
-            icon: mailpit.png
-            href: https://mailpit.paulnathan.io
-            description: Email Testing Server
-        - n8n:
-            icon: n8n.png
-            href: https://n8n.paulnathan.io
-            description: Workflow Automation
-        - Pairdrop:
-            icon: pairdrop.png
-            href: https://pairdrop.paulnathan.io
-            description: Peer-to-Peer File Transfer
-        - Temporal:
-            icon: temporal.png
-            href: https://temporal.paulnathan.io
-            description: Workflow Orchestration
-        - ConvertX:
-            icon: convertx.png
-            href: https://convertx.paulnathan.io
-            description: File Format Conversion
-        - PostHog:
-            icon: posthog.png
-            href: https://posthog.paulnathan.io
-            description: Product Analytics
-        - DVWA:
-            icon: mdi-shield-bug-outline
-            href: https://dvwa.paulnathan.io
-            description: Security Testing App
-        - Fizzy:
-            icon: mdi-flask-outline
-            href: https://fizzy.paulnathan.io
-            description: Fizzy
-        - Vert:
-            icon: mdi-application-outline
-            href: https://vert.paulnathan.io
-            description: Vert
         - Echo Server:
             icon: mdi-server-outline
             href: https://echo.paulnathan.io
             description: HTTP Echo & Debug Server
-        - Nginx:
-            icon: nginx.png
-            href: https://nginx.paulnathan.io
-            description: Web Server Example
     - Home:
         - Home Assistant:
             icon: home-assistant.png
             href: https://homeassistant.paulnathan.io
             description: Smart Home Automation
-        - Frigate:
-            icon: frigate.png
-            href: https://frigate.paulnathan.io
-            description: NVR & Object Detection
-        - Paperless-NGX:
-            icon: paperless-ngx.png
-            href: https://paperless.paulnathan.io
-            description: Document Management
-        - Netbox:
-            icon: netbox.png
-            href: https://netbox.paulnathan.io
-            description: Network Management Database
-        - Wyze Bridge:
-            icon: wyze.png
-            href: https://wyze-bridge.paulnathan.io
-            description: Camera Streaming Bridge
     - Media:
-        - Immich:
-            icon: immich.png
-            href: https://photos.paulnathan.io
-            description: Photo & Video Management
         - Jellyfin:
             icon: jellyfin.png
             href: https://jellyfin.paulnathan.io
             description: Media Streaming Server
-        - Kiwix:
-            icon: kiwix.png
-            href: https://kiwix.paulnathan.io
-            description: Offline Encyclopedia
-        - Libreddit:
-            icon: libreddit.png
-            href: https://libreddit.paulnathan.io
-            description: Private Reddit Frontend
-        - CopyParty:
-            icon: mdi-folder-upload-outline
-            href: https://copyparty.paulnathan.io
-            description: File Sharing Server
-        - Nestmtx:
-            icon: mdi-television-play
-            href: https://nestmtx.paulnathan.io
-            description: IPTV Playlist Server
-        - Karakeep:
-            icon: mdi-microphone-variant
-            href: https://karakeep.paulnathan.io
-            description: Karaoke Management
-    - Privacy:
-        - SearXNG:
-            icon: searxng.png
-            href: https://search.paulnathan.io
-            description: Private Metasearch Engine
-        - ProxiTok:
-            icon: proxitok.png
-            href: https://proxitok.paulnathan.io
-            description: Private TikTok Frontend
     - Infrastructure & Monitoring:
         - Grafana:
             icon: grafana.png
@@ -199,19 +75,7 @@ data:
             icon: redis.png
             href: https://redis.paulnathan.io
             description: Redis Management UI
-        - TrueNAS:
+        - BigNas:
             icon: truenas.png
             href: http://192.168.1.59
             description: Network Attached Storage
-        - Proxmox:
-            icon: proxmox.png
-            href: https://192.168.10.13:8006
-            description: Virtualization Platform
-        - iLO TrueNAS:
-            icon: hp-ilo.png
-            href: https://192.168.10.197
-            description: TrueNAS IPMI Management
-        - iLO Proxmox:
-            icon: hp-ilo.png
-            href: https://192.168.10.160
-            description: Proxmox IPMI Management
