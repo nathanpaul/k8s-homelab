@@ -8,11 +8,6 @@ kind: Kustomization
 # These require Cilium CRDs to be installed first
 
 resources:
- - crds/ciliumbgpclusterconfigs.yaml
- - crds/ciliumbgppeerconfigs.yaml
- - crds/ciliumbgpadvertisements.yaml
- - crds/ciliumbgpnodeconfigs.yaml
- - crds/ciliumbgpnodeconfigoverrides.yaml
  - ip-pool.yaml
  - bgp-policy.yaml
  - policies/block-lan-access.yaml
