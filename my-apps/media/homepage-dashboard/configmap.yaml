@@ -31,7 +31,6 @@ data:
             widget:
               type: argocd
               url: https://argocd.paulnathan.io
-              key: argocd
         - Echo Server:
             icon: mdi-server-outline
             href: https://echo.paulnathan.io

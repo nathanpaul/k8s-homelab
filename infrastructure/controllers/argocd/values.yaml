@@ -16,6 +16,7 @@ configs:
     # Performance: increase repo-server timeout for large Helm charts like prometheus-stack
     controller.repo.server.timeout.seconds: "300"
   cm:
+    users.anonymous.enabled: "true"
     url: "https://argocd.paulnathan.io"
     kustomize.buildOptions: "--enable-helm"
     # Use server-side diff to match ServerSideApply - prevents false "in-sync" detection
@@ -105,6 +106,9 @@ configs:
       hs.status = "Progressing"
       hs.message = "Initializing"
       return hs
+  rbac:
+    policy.csv: |
+      g, system:unauthenticated, role:readonly
 # Argo CD server settings
 server:
   replicas: 2
