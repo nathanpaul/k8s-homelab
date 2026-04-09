@@ -1,0 +1,480 @@
+# Enhanced kube-prometheus-stack configuration
+# Optimized for production workloads with security and performance considerations
+
+# Global settings
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+# CRD Configuration - Essential for proper functioning
+crds:
+  enabled: true
+# Prometheus Configuration
+prometheus:
+  enabled: true
+  prometheusSpec:
+    # Data retention and storage
+    retention: 15d
+    retentionSize: 15GB
+    walCompression: true
+    # Storage configuration with Longhorn
+    storageSpec:
+      volumeClaimTemplate:
+        metadata:
+          annotations:
+            # Longhorn backup settings - Important tier for monitoring data
+            longhorn.io/recurring-job-source: enabled
+            longhorn.io/recurring-job-group: important
+        spec:
+          storageClassName: longhorn
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+    # Resource allocation
+    resources:
+      requests:
+        cpu: 500m
+        memory: 2Gi
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+    # Security context
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+      fsGroup: 65534
+    # Scrape configuration
+    scrapeInterval: 30s
+    evaluationInterval: 30s
+    scrapeTimeout: 10s
+    # Enable service discovery for dynamic targets
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    # Additional scrape configs for custom monitoring
+    additionalScrapeConfigs:
+      # NOTE: Frigate metrics are scraped via ServiceMonitor if configured
+      # External scraping via HTTPS is commented out to avoid cert issues
+      # - job_name: 'frigate'
+      #   metrics_path: /api/metrics
+      #   scheme: https
+      #   static_configs:
+      #     - targets: ['frigate.paulnathan.io']
+      #   tls_config:
+      #     insecure_skip_verify: false
+      []
+    # Remote write configuration (for external storage if needed)
+    remoteWrite: []
+    # Alerting configuration
+    alerting:
+      alertmanagers:
+        - namespace: prometheus-stack
+          name: kube-prometheus-stack-alertmanager
+          port: 9093
+    caching:
+      enabled: true
+      cacheSize: 500MB
+      cacheTTL: 10m
+# Alertmanager Configuration
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    strategy:
+      type: Recreate
+    # Storage for alertmanager
+    storage:
+      volumeClaimTemplate:
+        metadata:
+          annotations:
+            # Longhorn backup settings - Important tier for alerting data
+            longhorn.io/recurring-job-source: enabled
+            longhorn.io/recurring-job-group: important
+        spec:
+          storageClassName: longhorn
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+    # Resource allocation
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+    # Security context
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+      fsGroup: 65534
+    # Retention
+    retention: 72h
+    # Configuration for alert routing (placeholder)
+    configSecret: ""
+# Grafana Configuration
+grafana:
+  enabled: true
+  deploymentStrategy:
+    type: Recreate
+  # Admin credentials
+  adminPassword: "prom-operator"
+  # Persistence
+  persistence:
+    enabled: true
+    storageClassName: longhorn
+    size: 10Gi
+    accessModes:
+      - ReadWriteOnce
+    annotations:
+      # Longhorn backup settings - Important tier for dashboard data
+      longhorn.io/recurring-job-source: enabled
+      longhorn.io/recurring-job-group: important
+  # Resource allocation
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  # Security context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 472
+    fsGroup: 472
+  # Enable plugins
+  plugins: []
+  # Sidecar configuration - discover dashboards from all namespaces
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+      label: grafana_dashboard
+      labelValue: "1"
+  # Default dashboards
+  defaultDashboardsEnabled: true
+  defaultDashboardsTimezone: UTC
+  # Community dashboards - auto-provisioned from grafana.com
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'grafana-dashboards-kubernetes'
+        orgId: 1
+        folder: 'Kubernetes'
+        type: file
+        disableDeletion: true
+        editable: false
+        options:
+          path: /var/lib/grafana/dashboards/kubernetes
+      - name: 'grafana-dashboards-infrastructure'
+        orgId: 1
+        folder: 'Infrastructure'
+        type: file
+        disableDeletion: true
+        editable: false
+        options:
+          path: /var/lib/grafana/dashboards/infrastructure
+      - name: 'grafana-dashboards-logging'
+        orgId: 1
+        folder: 'Logging'
+        type: file
+        disableDeletion: true
+        editable: false
+        options:
+          path: /var/lib/grafana/dashboards/logging
+  dashboards:
+    kubernetes:
+      k8s-views-global:
+        gnetId: 15757
+        revision: 37
+        datasource: Prometheus
+      k8s-views-namespaces:
+        gnetId: 15758
+        revision: 34
+        datasource: Prometheus
+      k8s-views-nodes:
+        gnetId: 15759
+        revision: 29
+        datasource: Prometheus
+      k8s-views-pods:
+        gnetId: 15760
+        revision: 28
+        datasource: Prometheus
+      node-exporter-full:
+        gnetId: 1860
+        revision: 36
+        datasource: Prometheus
+    logging:
+      loki-logs-app:
+        gnetId: 13639
+        revision: 2
+        datasource:
+          - name: DS_LOKI
+            value: Loki
+      loki-quick-search:
+        gnetId: 12019
+        revision: 2
+        datasource:
+          - name: DS_LOKI
+            value: Loki
+    infrastructure:
+      argocd:
+        gnetId: 14584
+        revision: 1
+        datasource: Prometheus
+      longhorn:
+        gnetId: 13032
+        revision: 6
+        datasource: Prometheus
+      cloudnative-pg:
+        gnetId: 20417
+        revision: 3
+        datasource: Prometheus
+      vpa-autoscaling:
+        gnetId: 22168
+        revision: 1
+        datasource: Prometheus
+  # Additional data sources configuration
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki-gateway.loki-stack.svc.cluster.local
+      jsonData:
+        httpHeaderName1: X-Scope-OrgID
+        timeout: 60
+        maxLines: 1000
+        derivedFields:
+          - datasourceUid: prometheus-uid
+            matcherRegex: "(?:logger=rpc\\.server|report).*?(?:traceID|trace_id)=([a-f\\d]+)"
+            name: TraceID
+            url: "$${__value.raw}"
+      secureJsonData:
+        httpHeaderValue1: "1"
+    - name: Tempo
+      type: tempo
+      access: proxy
+      url: http://tempo.monitoring.svc:3100
+  # Grafana configuration
+  grafana.ini:
+    server:
+      root_url: https://grafana.paulnathan.io
+    security:
+      allow_embedding: true
+      cookie_secure: true
+      strict_transport_security: true
+    analytics:
+      reporting_enabled: false
+      check_for_updates: false
+    snapshots:
+      external_enabled: false
+    explore:
+      enabled: true
+    feature_toggles:
+      enable: correlations
+# Node Exporter Configuration
+# Enable for comprehensive node-level metrics (VPA-optimized 2026-02-28)
+nodeExporter:
+  enabled: true
+  hostRootFsMount:
+    enabled: true
+    mountPropagation: HostToContainer
+  # Resource allocation
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+# kube-state-metrics Configuration (VPA-optimized 2026-02-28)
+kubeStateMetrics:
+  enabled: true
+  # Resource allocation
+  resources:
+    requests:
+      cpu: 50m
+      memory: 256Mi
+    limits:
+      cpu: 200m
+      memory: 512Mi
+# kube-state-metrics subchart values (VPA custom resource metrics)
+kube-state-metrics:
+  rbac:
+    extraRules:
+      - apiGroups: ["autoscaling.k8s.io"]
+        resources: ["verticalpodautoscalers"]
+        verbs: ["list", "watch"]
+  customResourceState:
+    enabled: true
+    config:
+      kind: CustomResourceStateMetrics
+      spec:
+        resources:
+          - groupVersionKind:
+              group: autoscaling.k8s.io
+              kind: "VerticalPodAutoscaler"
+              version: "v1"
+            labelsFromPath:
+              verticalpodautoscaler: [metadata, name]
+              namespace: [metadata, namespace]
+              target_api_version: [spec, targetRef, apiVersion]
+              target_kind: [spec, targetRef, kind]
+              target_name: [spec, targetRef, name]
+            metrics:
+              - name: "verticalpodautoscaler_labels"
+                help: "VPA labels"
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      name: [metadata, name]
+              # Memory recommendations
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_target"
+                help: "VPA target memory recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [target, memory]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "memory"
+                  unit: "byte"
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_lowerbound"
+                help: "VPA lower bound memory recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [lowerBound, memory]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "memory"
+                  unit: "byte"
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_upperbound"
+                help: "VPA upper bound memory recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [upperBound, memory]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "memory"
+                  unit: "byte"
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_uncappedtarget"
+                help: "VPA uncapped target memory recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [uncappedTarget, memory]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "memory"
+                  unit: "byte"
+              # CPU recommendations
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_target"
+                help: "VPA target CPU recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [target, cpu]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "cpu"
+                  unit: "core"
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_lowerbound"
+                help: "VPA lower bound CPU recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [lowerBound, cpu]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "cpu"
+                  unit: "core"
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_upperbound"
+                help: "VPA upper bound CPU recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [upperBound, cpu]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "cpu"
+                  unit: "core"
+              - name: "verticalpodautoscaler_status_recommendation_containerrecommendations_uncappedtarget"
+                help: "VPA uncapped target CPU recommendation"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, recommendation, containerRecommendations]
+                    valueFrom: [uncappedTarget, cpu]
+                    labelsFromPath:
+                      container: [containerName]
+                commonLabels:
+                  resource: "cpu"
+                  unit: "core"
+# Prometheus Operator Configuration
+prometheusOperator:
+  enabled: true
+  # Use cert-manager for webhook certs instead of Helm hook Jobs.
+  # The default hook Jobs (admission-create/admission-patch) create a
+  # ServiceAccount as a hook resource, then Jobs that depend on it.
+  # ArgoCD can delete the SA before the patch Job runs, causing a
+  # permanent stuck sync that cascades into API server overload.
+  admissionWebhooks:
+    certManager:
+      enabled: true
+  # Resource allocation
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  # Security context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65534
+# Additional monitoring components
+kubelet:
+  enabled: true
+  serviceMonitor:
+    interval: 30s
+# Talos hides these bind addresses, so we disable scraping to avoid target down alerts
+kubeApiServer:
+  enabled: true
+  serviceMonitor:
+    interval: 30s
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeProxy:
+  enabled: false
+coreDns:
+  enabled: true
+  serviceMonitor:
+    interval: 30s
+kubeDns:
+  enabled: false

@@ -1,0 +1,27 @@
+tempo:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: "0.0.0.0:4317"
+        http:
+          endpoint: "0.0.0.0:4318"
+  storage:
+    trace:
+      backend: s3
+      s3:
+        bucket: tempo
+        endpoint: 192.168.10.133:30293
+        insecure: true
+        forcepathstyle: true
+  retention: 72h
+  resources:
+    requests:
+      cpu: 50m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  extraEnvFrom:
+  - secretRef:
+      name: tempo-s3-credentials
