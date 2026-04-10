@@ -25,7 +25,7 @@ prometheus:
             longhorn.io/recurring-job-source: enabled
             longhorn.io/recurring-job-group: important
         spec:
-          storageClassName: longhorn
+          storageClassName: nfs-client
           accessModes:
             - ReadWriteOnce
           resources:
@@ -91,7 +91,7 @@ alertmanager:
             longhorn.io/recurring-job-source: enabled
             longhorn.io/recurring-job-group: important
         spec:
-          storageClassName: longhorn
+          storageClassName: nfs-client
           accessModes:
             - ReadWriteOnce
           resources:
@@ -124,7 +124,7 @@ grafana:
   # Persistence
   persistence:
     enabled: true
-    storageClassName: longhorn
+    storageClassName: nfs-client
     size: 10Gi
     accessModes:
       - ReadWriteOnce

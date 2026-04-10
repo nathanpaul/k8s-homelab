@@ -56,8 +56,6 @@ spec:
                 - kopia-ui
                 - local-storage
                 # Wave 4 — databases
-                - cloudnative-pg
-                - postgres-operator
                 - redis
                 - redis-instance
                 # Wave 5 — monitoring
@@ -130,8 +128,6 @@ spec:
                 - csi-driver-smb
                 - kopia-ui
                 - local-storage
-                - cloudnative-pg
-                - postgres-operator
                 - redis
                 - redis-instance
                 # Monitoring — handled by recommend-only rule

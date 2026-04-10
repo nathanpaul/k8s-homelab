@@ -8,7 +8,7 @@ metadata:
     type: config
     # backup: "daily"  # Disabled - deployment not running (node affinity)
 spec:
-  storageClassName: longhorn
+  storageClassName: nfs-client
   accessModes:
     - ReadWriteOnce
   resources:

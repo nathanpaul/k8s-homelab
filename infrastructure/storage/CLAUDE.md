@@ -27,7 +27,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: longhorn  # Default, can be omitted
+  storageClassName: nfs-client  # Default, can be omitted
 ```
 
 ## NFS Static PVs (CRITICAL: Use CSI, NOT legacy nfs:)

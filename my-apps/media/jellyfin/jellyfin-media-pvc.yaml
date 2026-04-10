@@ -4,25 +4,25 @@ metadata:
   name: jellyfin-media
 spec:
   capacity:
-    storage: 1Gi  # Minimal size since it's just for mounting
+    storage: 2Ti
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
   mountOptions:
-    - dir_mode=0777
-    - file_mode=0777
-    - uid=1000
-    - gid=1000
-    - cache=strict
-    - nosharesock
+    - nfsvers=4.1
+    - nolock
+    - tcp
+    - rsize=1048576
+    - wsize=1048576
+    - noatime
+    - nconnect=16
   csi:
-    driver: smb.csi.k8s.io
-    volumeHandle: jellyfin-media-volume
+    driver: nfs.csi.k8s.io
+    volumeHandle: jellyfin-media
     volumeAttributes:
-      source: "//192.168.1.59/jellyfin-media"
-    nodeStageSecretRef:
-      name: smbcreds
-      namespace: csi-driver-smb
+      server: "192.168.1.59"
+      share: "/mnt/user/k8s/jellyfin-media"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -34,6 +34,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi  # Minimal size since it's just for mounting
+      storage: 2Ti
   volumeName: jellyfin-media
   storageClassName: ""

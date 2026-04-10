@@ -7,6 +7,5 @@ resources:
 - httproute-argocd.yaml
 - httproute-longhorn.yaml
 
-#- gw-tcp-postgres.yaml
 generatorOptions:
   disableNameSuffixHash: true

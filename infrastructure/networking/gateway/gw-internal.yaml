@@ -34,10 +34,3 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    # TCP listener for PostgreSQL
-    - name: postgres
-      protocol: TCP
-      port: 5432
-      allowedRoutes:
-        namespaces:
-          from: Same

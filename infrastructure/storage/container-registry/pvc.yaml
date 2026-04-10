@@ -12,7 +12,7 @@ metadata:
     longhorn.io/recurring-job-source: enabled
     longhorn.io/recurring-job-group: critical
 spec:
-  storageClassName: longhorn
+  storageClassName: nfs-client
   accessModes:
     - ReadWriteOnce
   resources:

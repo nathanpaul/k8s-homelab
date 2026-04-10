@@ -199,7 +199,6 @@ spec:
 - Change PVC name if you want automatic restore
 - Delete ReplicationSource/ReplicationDestination manually (Kyverno will recreate if label present)
 - Use backup labels on non-Longhorn PVCs (snapshot support required)
-- Add backup labels to CNPG database PVCs (they use Barman to S3, not Kyverno/VolSync)
 
 ## Critical: Kyverno Policy Performance Rules
 

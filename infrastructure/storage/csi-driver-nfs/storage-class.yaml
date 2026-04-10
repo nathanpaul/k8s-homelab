@@ -75,3 +75,26 @@ spec:
     volumeAttributes:
       server: "192.168.1.59"
       share: "/mnt/user/photos/All"
+---
+# Default NFS storage class (10G)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-client
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 192.168.1.59
+  share: /mnt/user/k8s
+  subDir: ${pvc.metadata.namespace}-${pvc.metadata.name}
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1
+  - nolock
+  - tcp
+  - rsize=1048576
+  - wsize=1048576
+  - noatime
+  - nconnect=16

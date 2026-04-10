@@ -71,6 +71,7 @@ spec:
           persistentVolumeClaim:
             claimName: config
         - name: media
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: jellyfin-media
         - name: cache
           emptyDir: {}
