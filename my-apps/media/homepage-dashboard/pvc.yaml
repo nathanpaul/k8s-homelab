@@ -7,7 +7,6 @@ metadata:
   labels:
     app: homepage
     type: config
-    backup: "daily"
 spec:
   accessModes:
     - ReadWriteOnce
