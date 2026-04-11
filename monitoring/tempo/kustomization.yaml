@@ -4,9 +4,4 @@ namespace: monitoring
 resources:
 - ns.yaml
 - externalsecret.yaml
-helmCharts:
-- name: tempo
-  repo: https://grafana.github.io/helm-charts
-  version: 1.24.4 # Latest
-  releaseName: tempo
-  valuesFile: values.yaml
+- rendered.yaml
