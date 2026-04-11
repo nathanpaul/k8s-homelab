@@ -8,12 +8,9 @@ tempo:
           endpoint: "0.0.0.0:4318"
   storage:
     trace:
-      backend: s3
-      s3:
-        bucket: tempo
-        endpoint: 192.168.1.59:30293
-        insecure: true
-        forcepathstyle: true
+      backend: local
+      local:
+        path: /var/tempo/traces
   retention: 72h
   resources:
     requests:
@@ -22,6 +19,7 @@ tempo:
     limits:
       cpu: 500m
       memory: 512Mi
-  extraEnvFrom:
-  - secretRef:
-      name: tempo-s3-credentials
+persistence:
+  enabled: true
+  storageClass: "nfs-client"
+  size: 5Gi
