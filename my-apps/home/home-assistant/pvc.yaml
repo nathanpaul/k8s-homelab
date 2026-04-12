@@ -14,5 +14,5 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: longhorn
+  storageClassName: nfs-client
   # dataSourceRef is added dynamically by Kyverno if a backup exists
