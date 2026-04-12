@@ -13,3 +13,7 @@ spec:
   ports:
     - name: web
       port: 8096
+      targetPort: http
+    - name: metrics
+      port: 9097
+      targetPort: metrics

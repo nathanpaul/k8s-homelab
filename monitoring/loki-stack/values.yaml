@@ -38,7 +38,7 @@ loki:
     retention_period: 30d
 deploymentMode: SimpleScalable
 backend:
-  replicas: 2
+  replicas: 3
   resources:
     requests:
       cpu: 50m
@@ -50,7 +50,7 @@ backend:
   - secretRef:
       name: loki-s3-credentials
 read:
-  replicas: 2
+  replicas: 3
   resources:
     requests:
       cpu: 50m
@@ -62,7 +62,7 @@ read:
   - secretRef:
       name: loki-s3-credentials
 write:
-  replicas: 2
+  replicas: 3
   resources:
     requests:
       cpu: 50m

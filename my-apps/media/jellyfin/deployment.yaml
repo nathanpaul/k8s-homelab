@@ -66,6 +66,28 @@ spec:
               mountPath: /mnt/media
             - name: cache
               mountPath: /cache
+        - name: jellyfin-exporter
+          image: docker.io/drkhsh/jellyfin-exporter:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: JELLYFIN_BASEURL
+              value: "http://localhost:8096"
+            - name: JELLYFIN_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: jellyfin-auth
+                  key: apiKey
+                  optional: true # Initially optional until the user creates it
+          ports:
+            - name: metrics
+              containerPort: 9097
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
       volumes:
         - name: config
           persistentVolumeClaim:

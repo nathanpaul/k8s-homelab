@@ -16,3 +16,5 @@ resources:
   - jellyfin-media-pvc.yaml
   - deployment.yaml
   - httproute.yaml
+  - servicemonitor.yaml
+  - secret.yaml

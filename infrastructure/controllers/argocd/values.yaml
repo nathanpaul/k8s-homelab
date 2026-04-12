@@ -111,7 +111,7 @@ configs:
       g, system:unauthenticated, role:readonly
 # Argo CD server settings
 server:
-  replicas: 2
+  replicas: 3
   ingress:
     enabled: false
   env:
@@ -199,7 +199,7 @@ controller:
       memory: 6Gi   # Increased from 4Gi to accommodate memory growth
 # Argo CD repo-server settings
 repoServer:
-  replicas: 2
+  replicas: 3
   env:
     - name: ARGOCD_EXEC_TIMEOUT
       value: "3m"

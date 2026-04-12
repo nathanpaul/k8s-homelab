@@ -238,6 +238,20 @@ grafana:
         gnetId: 22168
         revision: 1
         datasource: Prometheus
+      envoy-global:
+        gnetId: 11875
+        revision: 5
+        datasource: Prometheus
+      kubernetes-pvc:
+        gnetId: 13646
+        revision: 2
+        datasource: Prometheus
+      kyverno:
+        url: https://raw.githubusercontent.com/kyverno/kyverno/main/charts/kyverno/charts/grafana/dashboard/kyverno-dashboard.json
+      jellyfin-exporter:
+        gnetId: 14389
+        revision: 1
+        datasource: Prometheus
   # Additional data sources configuration
   additionalDataSources:
     - name: Loki
