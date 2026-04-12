@@ -220,9 +220,8 @@ spec:
                 daily: 7
                 weekly: 4
                 monthly: 2
-              copyMethod: Snapshot
+              copyMethod: Direct
               storageClassName: nfs-client
-              volumeSnapshotClassName: longhorn-snapclass
               cacheCapacity: "2Gi"
               moverSecurityContext:
                 runAsUser: 568
@@ -265,9 +264,8 @@ spec:
               manual: restore-once
             kopia:
               repository: "volsync-{{request.object.metadata.name}}"
-              copyMethod: Snapshot
+              copyMethod: Direct
               storageClassName: nfs-client
-              volumeSnapshotClassName: longhorn-snapclass
               accessModes:
                 - "{{ request.object.spec.accessModes[0] || 'ReadWriteOnce' }}"
               capacity: "{{ request.object.spec.resources.requests.storage }}"
