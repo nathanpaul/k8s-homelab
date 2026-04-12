@@ -6,6 +6,7 @@ resources:
 - gw-internal.yaml
 - httproute-argocd.yaml
 - httproute-longhorn.yaml
+- httproute-redirect.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
