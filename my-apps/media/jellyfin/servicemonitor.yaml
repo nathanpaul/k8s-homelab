@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+  labels:
+    app: jellyfin
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: jellyfin
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
