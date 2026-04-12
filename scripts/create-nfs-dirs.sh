@@ -20,9 +20,6 @@ NFS_DIRECTORIES=(
     # Specific static NFS applications
     "/mnt/user/k8s/jellyfin-media"
     "/mnt/user/k8s/volsync-kopia-nfs"
-
-    # Immich photos static read-only mount
-    "/mnt/user/photos/All"
 )
 
 # Iterate through the array and create directories
